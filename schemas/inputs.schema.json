@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "continuity-plugin/inputs.schema.json",
+  "title": "continuity input row (one JSONL line written by list_inputs.py v1.x)",
+  "description": "One object per classified input of a Claude Code or Codex session. The field `class` says WHO wrote the text, as far as the raw file can tell. Human classes keep the full verbatim text (redacted like the record). Non human classes keep only the first 200 characters plus length and sha256, so the file stays small. The raw session file stays the evidence; every row points at it by `file` and `line`.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["seq", "class", "harness", "file", "line", "file_line", "timestamp", "kind", "text", "text_chars", "text_sha256", "text_truncated", "note"],
+  "properties": {
+    "seq": {"type": "integer", "minimum": 1, "description": "Order of the row in this list, 1 based, over all classes."},
+    "class": {
+      "type": "string",
+      "enum": ["human_typed", "human_typed_mid_turn", "human_card_answer", "human_card_dismissed", "slash_command", "interrupt_marker", "harness_injected", "ai_compact_summary", "ai_meta"],
+      "description": "human_typed: a message the human sent. human_typed_mid_turn: typed while a turn was running (Claude queued_command). human_card_answer: answer to a decision card. human_card_dismissed: the card was dismissed, which is NOT a rejected option. slash_command: a settings or skill command. interrupt_marker: written by the harness when the human interrupted. harness_injected: text the harness stored under a user role (instruction files, hooks, app context, attachment wrappers). ai_compact_summary: a summary of earlier work stored as a user line. ai_meta: AI or harness authored lines flagged isMeta, sidechain or peer."
+    },
+    "harness": {"type": "string", "enum": ["claude", "codex"]},
+    "file": {"type": "string", "pattern": "^F[0-9]+$", "description": "Tag of the raw file in this run (F1, F2... ordered by first then last timestamp). Same tag as make_record.py."},
+    "line": {"type": "integer", "minimum": 1, "description": "1 based raw line number inside that file."},
+    "file_line": {"type": "string", "pattern": "^(F[0-9]+ )?L[0-9]+$", "description": "The record label: `F1 L12` for several files, `L12` for one."},
+    "timestamp": {"type": "string", "description": "As written in the raw line; empty when the line has none."},
+    "kind": {"type": "string", "description": "Human readable class name used in the Markdown table, or ATTACHMENT."},
+    "text": {"type": "string", "description": "Verbatim text, secrets redacted like the record. Truncated to 200 characters when text_truncated is true."},
+    "text_chars": {"type": "integer", "minimum": 0, "description": "Length of the full original text."},
+    "text_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "sha256 of the full original (unredacted) text."},
+    "text_truncated": {"type": "boolean"},
+    "note": {"type": "string", "description": "Why the row got this class, the rule or field used, and the possible mistranscription note for a dismissed card."},
+    "origin": {"type": "string", "description": "Claude origin.kind of the raw line, or `none` when the field is absent (older builds)."},
+    "role": {"type": "string", "description": "Codex role of the message (always `user` for rows; developer messages are counted, not listed)."},
+    "attachments": {"type": "array", "items": {"type": "string"}, "description": "Names of the human's attachments, kept on purpose."},
+    "flag": {"type": "string", "enum": ["ATTACHMENT"], "description": "Set on the harness_injected wrapper row of an attachment."},
+    "delivered": {"type": "boolean", "description": "Present and false only on a human_typed row that exists as a queue enqueue line but never became a user line (a hook blocked it, or it was dropped). It was typed by the human and never reached the model; it is NOT an approval the model received."},
+    "question": {"type": "string", "description": "For card rows: the question text(s) the card asked."}
+  }
+}

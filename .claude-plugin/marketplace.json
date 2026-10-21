@@ -1,0 +1,13 @@
+{
+  "name": "agent-continuity",
+  "owner": {
+    "name": "Otman Mechbal"
+  },
+  "plugins": [
+    {
+      "name": "continuity",
+      "source": "./",
+      "description": "Checkpoint, conversation record, context closeout and handoff: keep the human's own words and decisions intact across sessions and tools."
+    }
+  ]
+}
