@@ -126,8 +126,6 @@ claude plugin marketplace add otmanm/continuity
 claude plugin install continuity@agent-continuity
 ```
 
-Until the repository is public, the marketplace command needs a GitHub account with access to it.
-
 Then type `/continuity:` in a session to see the four skills.
 
 For `context-closeout`, keep your decision files (`MISSION.md`, `GOALS.md`, `INTENT.md`, `STATE.md`, `DECISIONS.md`, any you use) in one folder, and point to it with the environment variable `CONTINUITY_INTENT_DIR`, or name the folder `intent/` at your project root. Files you do not keep are reported `NOT_PRESENT`.
