@@ -24,11 +24,13 @@ This plugin covers one part of that list: the record and the checkpoint. It keep
 
 ## State of this release
 
-This is an early public version: v0.2.0, a pre release. On 21 October 2026 the author said:
+This is an early public version: v0.2.1, a pre release. On 21 October 2026 the author said:
 
 > "it's not ready yet. There are, like, some things I like to add, and the telemetry is not yet really clear for me."
 
 > "we can make a public version and then we can update it later."
+
+A fifth skill for verification, drift detection and replay is planned. It is not built yet: this release contains only the four skills listed below.
 
 Some parts of the plugin are exact code. Other parts are instructions that the AI has to follow. The table shows which is which.
 

@@ -21,7 +21,7 @@ Rules (v1.1.0):
      (a slash command such as /model) is counted in slash_commands, never in user_messages.
 
 Usage: python3 session_metrics.py --run-at <ISO time> --out metrics.csv <file.jsonl> [...]
-Method per column: METHOD.md next to this script.
+Method per column: the comments beside each count in this script.
 """
 import argparse, collections, csv, datetime, hashlib, io, json, os, re, sys
 

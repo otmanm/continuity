@@ -1,6 +1,6 @@
 {
   "name": "continuity",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Keep the human's own words and decisions intact across AI coding sessions, compactions and tools. Four skills (checkpoint, conversation-record, context-closeout, handoff) backed by plain Python scripts that separate what the human typed from what the AI or the harness wrote.",
   "author": { "name": "Otman Mechbal" },
   "homepage": "https://github.com/otmanm/continuity",

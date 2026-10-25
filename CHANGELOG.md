@@ -2,6 +2,10 @@
 
 Newest first. Dates are in the format YYYY-MM-DD.
 
+## 0.2.1 (2026-10-25)
+
+README and TESTED.md only, no change to skills or scripts. Removes the install note from the private phase, and states that the planned fifth skill (verification, drift detection, replay) is not built. Fixes a pointer in `session_metrics.py` to a METHOD.md file that is not in this repository. Adds TESTED.md with the first clean install test.
+
 ## 0.2.0 (2026-10-21)
 
 First public version, marked pre release. Skill texts reworded in neutral terms for any user. Includes `zst_to_scratch.py`, the meta decisions table, the branch map, A/B/C cards for pending decisions and the session record step in `context-closeout`. The README gains the sections "Why I built this" and "State of this release".
